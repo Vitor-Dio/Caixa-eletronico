@@ -1,66 +1,84 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main() {
+void main()
+{
     int opcao;
-    float saldo = 1000;
-    float emprestimo = 0;
+    float saldo = 1000.00;
+    float emprestimo = 0.00;
     float valor;
 
-    do {
-        printf("\n1 - Verificar saldo");
-        printf("\n2 - Depositar valor");
-        printf("\n3 - Sacar valor");
-        printf("\n4 - Pedir emprestimo");
-        printf("\n5 - Pagar emprestimo");
-        printf("\n6 - Consultar emprestimo");
-        printf("\n7 - Sair");
-        printf("\nOpcao: ");
+    do
+    {
+        printf("\n===== CAIXA ELETRONICO =====\n");
+        printf("1 - Verificar saldo\n");
+        printf("2 - Depositar valor\n");
+        printf("3 - Sacar valor\n");
+        printf("4 - Pedir emprestimo\n");
+        printf("5 - Pagar emprestimo\n");
+        printf("6 - Consultar emprestimo\n");
+        printf("7 - Sair\n");
+        printf("Opcao: ");
         scanf("%d", &opcao);
 
-        switch(opcao) {
+        switch(opcao)
+        {
             case 1:
                 printf("Saldo: R$ %.2f\n", saldo);
                 break;
 
             case 2:
-                printf("Valor para depositar: ");
+                printf("Valor do deposito: ");
                 scanf("%f", &valor);
-                saldo += valor;
+                saldo = saldo + valor;
+                printf("Deposito realizado!\n");
                 break;
 
             case 3:
-                printf("Valor para sacar: ");
+                printf("Valor do saque: ");
                 scanf("%f", &valor);
 
                 if(valor <= saldo)
-                    saldo -= valor;
+                {
+                    saldo = saldo - valor;
+                    printf("Saque realizado!\n");
+                }
                 else
+                {
                     printf("Saldo insuficiente!\n");
+                }
                 break;
 
             case 4:
                 printf("Valor do emprestimo: ");
                 scanf("%f", &valor);
-                emprestimo += valor;
-                saldo += valor;
+                saldo = saldo + valor;
+                emprestimo = emprestimo + valor;
+                printf("Emprestimo realizado!\n");
                 break;
 
             case 5:
                 printf("Valor para pagar: ");
                 scanf("%f", &valor);
 
-                if(valor <= saldo) {
-                    saldo -= valor;
-                    emprestimo -= valor;
+                if(valor <= saldo && valor <= emprestimo)
+                {
+                    saldo = saldo - valor;
+                    emprestimo = emprestimo - valor;
+                    printf("Pagamento realizado!\n");
+                }
+                else
+                {
+                    printf("Valor invalido!\n");
                 }
                 break;
 
             case 6:
-                printf("Emprestimo: R$ %.2f\n", emprestimo);
+                printf("Emprestimo atual: R$ %.2f\n", emprestimo);
                 break;
 
             case 7:
-                printf("Saindo...\n");
+                printf("Programa encerrado!\n");
                 break;
 
             default:
